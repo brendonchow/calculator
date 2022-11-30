@@ -16,11 +16,6 @@ operators.forEach(button => {
   button.addEventListener("mousedown", e => inputOperator(e.target.textContent));
 })
 
-window.addEventListener("keydown", event => {
-  const button = document.querySelector(`[data-key="${event.key}"]`);
-  if (button) choice[button.classList.value](button.textContent);
-});
-
 let prevNumber = "";
 let operator = "";
 let currentNumber = "";
@@ -57,16 +52,13 @@ function divideByZero(operator, currentNumber) {
 function inputOperand(value) {
   if (value === "." && currentNumber.includes(".")) return;
   else if (currentNumber === "" || currentNumber === "0") {
-    if (value !== ".") {
-      displayCurrent.textContent = value;    
-    } else {
-      displayCurrent.textContent = "0.";
-    }
+    if (value !== ".") displayCurrent.textContent = value     
+    else displayCurrent.textContent = "0.";
     currentNumber = displayCurrent.textContent;
   } else {
     displayCurrent.textContent += value;
     currentNumber += value;
-    }
+  }
 }
 
 function inputClear() {
@@ -101,6 +93,11 @@ const choice = {
     inputClear();
   }
 }
+
+window.addEventListener("keydown", event => {
+  const button = document.querySelector(`[data-key="${event.key}"]`);
+  if (button) choice[button.classList.value](button.textContent);
+});
 
 function add(x, y) {
   return x + y;
