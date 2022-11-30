@@ -50,20 +50,14 @@ section * {
   font-size: 25px;
   height: 25px;
   font-size: 25px;
+  padding: 0 5px;
 }
 
 .displayCurrent {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
   margin: 0;
-  flex-wrap: wrap;
-}
-
-span {
-  font-size: 70px;
-  flex: 0 1 auto;
-  font-size: 70px;
+  text-align: right;
+  word-break: break-all;
+  font-size: 75px;;
 }
 
 button {
@@ -83,20 +77,18 @@ button {
   background-color: #FF8F1F;
 }
 
-.operatorActive {
+
+
+.equal:active,.operator:active {
   background-color: #ffc183;
 }
 
-.equal:active {
-  background-color: #ffc183;
-}
-
-.clear,.plusMinus,.percent {
+.clear,.delete,.percent {
   background-color: dodgerblue;
 }
 
 .clear:active,
-.plusMinus:active,
+.delete:active,
 .percent:active {
   background-color: rgb(123, 189, 255);
 }
