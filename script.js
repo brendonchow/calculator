@@ -44,7 +44,6 @@ let operator = "";
 operators.forEach(button => {
   button.addEventListener("mousedown", e => inputOperator(e.target.textContent));
 })
-
 function inputOperator(value) {
   if (!prevNumber) {
     operator = value;
@@ -69,10 +68,7 @@ function reset(operatorVal) {
   operator = operatorVal;
 }
 
-operands.forEach(button => {
-  button.addEventListener("mousedown", e => inputOperand(e.target.textContent));
-});
-
+operands.forEach(button => button.addEventListener("mousedown", e => inputOperand(e.target.textContent)));
 function inputOperand(value) {
   if (operator && !prevNumber) {
     prevNumber = displayCurrent.textContent;
@@ -92,15 +88,15 @@ function inputOperand(value) {
 }
 
 const clear = document.querySelector(".clear");
-clear.addEventListener("click", () => {
+clear.addEventListener("click", inputClear);
+function inputClear() {
   displayCurrent.textContent = "0";
   displayPrev.textContent = "";
   prevNumber = "";
   operator = "";
-});
+}
 
 backspace.addEventListener("mousedown", () => inputBackspace);
-
 function inputBackspace() {
   let currentNumber = displayCurrent.textContent
   if (currentNumber !== "0") {
@@ -121,6 +117,9 @@ const choice = {
   },
   equal() {
     inputEqual();
+  },
+  clear() {
+    inputClear();
   }
 }
 
