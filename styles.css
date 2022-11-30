@@ -1,6 +1,5 @@
-* {
-  font-size: 50px;
-}
+
+
 body {
   min-height: 100vh;
   display: flex;
@@ -9,14 +8,12 @@ body {
 }
 
 section {
-  width: 400px;
-  height: 500px;
   margin: auto;
   background-color: black;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-
+  width: 400px;
 }
 
 .border {
@@ -27,6 +24,7 @@ section {
 
 section > * {
   display: flex;
+  flex: 0 1 auto;
 }
 
 section * {
@@ -36,24 +34,43 @@ section * {
 }
 
 .display {
-  flex: 0 1 auto;
-  height: 100px;
-  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
   background-color: #b2b9b7;
+  margin: 5px;
+  padding: 5px;
 }
 
-.displayText {
-  margin: auto;
-  width: 100%;
+.displayPrev {
   text-align: right;
-  font-size: 125px;
-  line-height: 0;
+  margin: 0;
+  flex: 2 0 0;
+  font-size: 25px;
+}
+
+.displayCurrent {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0;
+  flex: 3 0 0;
+  flex-wrap: wrap;
+}
+
+span {
+  font-size: 70px;
+  flex: 0 1 auto;
+  font-size: 70px;
 }
 
 button {
   border-radius: 5px;
   border: none;
   padding: 0;
+  font-size: 50px;
+  width: 80px;
+  height: 80px;
 }
 
 .zero {
@@ -64,11 +81,19 @@ button {
   background-color: #FF8F1F;
 }
 
+.operator:active {
+  background-color: #FF8F1F;
+}
+
 .misc {
   background-color: dodgerblue;
 }
 
-.number {
+.operand {
   background-color: #217C7E;
+}
+
+.operand:active {
+  background-color: #33b9bb;
 }
 
