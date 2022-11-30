@@ -115,21 +115,16 @@ function divide(x, y) {
   return  x / y;
 }
 
+const applyOperators = {
+  "+": add,
+  "-": subtract,
+  "*": multiply,
+  "/": divide,
+}
+
 function operate(x, operator, y) {
   x = parseFloat(x);
   y = parseFloat(y);
-  switch (operator) {
-    case "+": 
-      return add(x, y);
-    
-    case "-":
-      return subtract(x, y);
-    
-    case "*":
-      return multiply(x, y);
-    
-    case "/":
-      return divide(x, y);
-  }
+  return applyOperators[operator](x, y);
 }
   
