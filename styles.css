@@ -69,7 +69,7 @@ button {
   height: 80px;
 }
 
-.zero {
+[data-key="0"] {
   flex: 2 1 0;
 }
 
@@ -83,12 +83,12 @@ button {
   background-color: #ffc183;
 }
 
-.clear,.delete,.percent {
+.clear,.backspace,.percent {
   background-color: dodgerblue;
 }
 
 .clear:active,
-.delete:active,
+.backspace:active,
 .percent:active {
   background-color: rgb(123, 189, 255);
 }

@@ -2,7 +2,7 @@ const displayCurrent = document.querySelector(".displayCurrent");
 const operands = document.querySelectorAll(".operand");
 const displayPrev = document.querySelector(".displayPrev");
 const operators = document.querySelectorAll(".operator");
-const backspace = document.querySelector(".delete");
+const backspace = document.querySelector(".backspace");
 
 function add(x, y) {
   return x + y;
@@ -38,7 +38,6 @@ function operate(x, operator, y) {
   }
 }
 
-let currentNumber = "0";
 let prevNumber = "";
 let operator = "";
 
@@ -47,29 +46,27 @@ operators.forEach(button => {
 })
 
 function inputOperator(value) {
-    if (!prevNumber) {
-      operator = value;
-    } else {
-      reset(value);
-    }
-    displayPrev.textContent = `${currentNumber} ${operator}`; 
+  if (!prevNumber) {
+    operator = value;
+  } else {
+    reset(value);
   }
+  displayPrev.textContent = `${displayCurrent.textContent} ${operator}`; 
+}
 
 const equal = document.querySelector(".equal");
-equal.addEventListener("mousedown", event => {
-  operators.forEach(operator => operator.classList.remove("operatorActive"));
-  if (operator && prevNumber && currentNumber) {
-    displayPrev.textContent = `${prevNumber} ${operator} ${currentNumber} =`;
+equal.addEventListener("mousedown", inputEqual)
+function inputEqual() {
+  if (operator && prevNumber) {
+    displayPrev.textContent = `${prevNumber} ${operator} ${displayCurrent.textContent} =`;
     reset("");
   }
-})
+}
 
 function reset(operatorVal) {
-  currentNumber = Math.round(operate(prevNumber, operator, currentNumber) * 1000) / 1000;
-  currentNumber = currentNumber.toString();
+  displayCurrent.textContent = Math.round(operate(prevNumber, operator, displayCurrent.textContent) * 1000) / 1000;
   prevNumber = "";
   operator = operatorVal;
-  displayCurrent.textContent = currentNumber;
 }
 
 operands.forEach(button => {
@@ -77,35 +74,58 @@ operands.forEach(button => {
 });
 
 function inputOperand(value) {
-    if (operator && !prevNumber) {
-      prevNumber = currentNumber;
-      currentNumber = "0";
-      displayCurrent.textContent = "0";
-    }    
-    if (displayCurrent.textContent === "0" && value !== ".") {
-      if (value !== "0") {
-        displayCurrent.textContent = value;
-        currentNumber = value;
-      }
-    } 
-    else {
-      if (value === ".") { 
-        if (currentNumber.includes(".")) return;
-      }
-      displayCurrent.textContent += value;
-      currentNumber += value;
+  if (operator && !prevNumber) {
+    prevNumber = displayCurrent.textContent;
+    displayCurrent.textContent = "0";
+  }    
+  if (displayCurrent.textContent === "0" && value !== ".") {
+    if (value !== "0") {
+      displayCurrent.textContent = value;
     }
+  } 
+  else {
+    if (value === ".") { 
+      if (displayCurrent.textContent.includes(".")) return;
+    }
+    displayCurrent.textContent += value;
+  }
 }
 
 const clear = document.querySelector(".clear");
-clear.addEventListener("click", event => {
+clear.addEventListener("click", () => {
   displayCurrent.textContent = "0";
   displayPrev.textContent = "";
-  currentNumber = "0";
   prevNumber = "";
   operator = "";
 });
 
+backspace.addEventListener("mousedown", () => inputBackspace);
+
+function inputBackspace() {
+  let currentNumber = displayCurrent.textContent
+  if (currentNumber !== "0") {
+    if (currentNumber.length === 1) displayCurrent.textContent = "0";
+    else displayCurrent.textContent = currentNumber.slice(0, currentNumber.length - 1);
+  }
+}
+
+const choice = {
+  operand(value) {
+    inputOperand(value);
+  },
+  operator(value) {
+    inputOperator(value);
+  },
+  backspace() {
+    inputBackspace();
+  },
+  equal() {
+    inputEqual();
+  }
+}
+
 window.addEventListener("keydown", event => {
-  console.log(event);
+  const button = document.querySelector(`[data-key="${event.key}"]`);
+  if (button) choice[button.classList.value](button.textContent);
 });
+  
