@@ -40,12 +40,15 @@ section * {
   background-color: #b2b9b7;
   margin: 5px;
   padding: 5px;
+  
 }
 
 .displayPrev {
   text-align: right;
   margin: 0;
-  flex: 2 0 0;
+  flex-basis: auto;
+  font-size: 25px;
+  height: 25px;
   font-size: 25px;
 }
 
@@ -54,7 +57,6 @@ section * {
   justify-content: flex-end;
   align-items: center;
   margin: 0;
-  flex: 3 0 0;
   flex-wrap: wrap;
 }
 
@@ -77,19 +79,29 @@ button {
   flex: 2 1 0;
 }
 
-.operator {
+.operator,.equal {
   background-color: #FF8F1F;
 }
 
-.operator:active {
-  background-color: #FF8F1F;
+.operatorActive {
+  background-color: #ffc183;
 }
 
-.misc {
+.equal:active {
+  background-color: #ffc183;
+}
+
+.clear,.plusMinus,.percent {
   background-color: dodgerblue;
 }
 
-.operand {
+.clear:active,
+.plusMinus:active,
+.percent:active {
+  background-color: rgb(123, 189, 255);
+}
+
+.operand{
   background-color: #217C7E;
 }
 
